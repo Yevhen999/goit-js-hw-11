@@ -26,3 +26,11 @@
 .is-hidden {
   display: none;
 }
+
+.info {
+  display: flex;
+}
+
+.info :not(:last-child) {
+  margin-right: 10px;
+}
