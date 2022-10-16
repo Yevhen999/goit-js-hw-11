@@ -1,0 +1,28 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.photo-card {
+  margin: 15px;
+}
+
+.search-form {
+  margin-top: 20px;
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+}
+
+.load-more {
+  background-color: lightblue;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.is-hidden {
+  display: none;
+}
