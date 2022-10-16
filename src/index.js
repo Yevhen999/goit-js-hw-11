@@ -3,6 +3,8 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 import { FetchImages } from './js/FetchImages';
 import { createMarkup } from './js/createMarkup';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const fetchImages = new FetchImages();
 
@@ -29,6 +31,10 @@ const handleSubmit = async event => {
 
     const markup = createMarkup(hits);
     refs.galleryRef.insertAdjacentHTML('beforeend', markup);
+    const lightbox = new SimpleLightbox('.gallery a', {
+      captionDelay: 250,
+      captionData: 'alt',
+    });
     fetchImages.calculateTotalPages(total);
     if (total === 0) {
       Notiflix.Notify.failure(
@@ -70,6 +76,7 @@ function clearPage() {
   refs.galleryRef.innerHTML = '';
   refs.loadMoreBtn.classList.add('is-hidden');
 }
+
 // --------------------------------------------------------------------
 // fetchImages
 //   .getImages()

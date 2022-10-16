@@ -16,8 +16,6 @@ input {
 .search-form {
   padding-top: 10px;
   padding-bottom: 10px;
-  /* margin-top: 20px; */
-  /* margin-bottom: 20px; */
   background-color: blue;
   display: flex;
   justify-content: center;
