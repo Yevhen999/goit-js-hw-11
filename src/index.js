@@ -10,6 +10,7 @@ const fetchImages = new FetchImages();
 const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   captionData: 'alt',
+  navText: ['<', '>'],
 });
 const handleSubmit = async event => {
   event.preventDefault();
