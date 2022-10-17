@@ -7,7 +7,10 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const fetchImages = new FetchImages();
-
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+  captionData: 'alt',
+});
 const handleSubmit = async event => {
   event.preventDefault();
   const {
@@ -31,10 +34,7 @@ const handleSubmit = async event => {
 
     const markup = createMarkup(hits);
     refs.galleryRef.insertAdjacentHTML('beforeend', markup);
-    const lightbox = new SimpleLightbox('.gallery a', {
-      captionDelay: 250,
-      captionData: 'alt',
-    });
+    lightbox.refresh();
     fetchImages.calculateTotalPages(total);
     if (total === 0) {
       Notiflix.Notify.failure(
@@ -62,6 +62,7 @@ const onLoadMore = async () => {
     const { hits } = await fetchImages.getImages();
     const markup = createMarkup(hits);
     refs.galleryRef.insertAdjacentHTML('beforeend', markup);
+    lightbox.refresh();
   } catch (error) {
     console.log(error);
     Notiflix.Notify.failure(`${error.message}`);
@@ -76,38 +77,3 @@ function clearPage() {
   refs.galleryRef.innerHTML = '';
   refs.loadMoreBtn.classList.add('is-hidden');
 }
-
-// --------------------------------------------------------------------
-// fetchImages
-//   .getImages()
-//   .then(({ hits, total, totalHits }) => {
-//     const markup = createMarkup(hits);
-//     refs.galleryRef.insertAdjacentHTML('beforeend', markup);
-//     fetchImages.calculateTotalPages(total);
-//     if (total === 0) {
-//       Notiflix.Notify.failure(
-//         'Sorry, there are no images matching your search query. Please try again.'
-//       );
-//       return;
-//     }
-
-//     Notiflix.Notify.success(`We found ${totalHits} images`);
-//     if (fetchImages.isShowLoadMore) {
-//       refs.loadMoreBtn.classList.remove('is-hidden');
-//     }
-//   })
-//   .catch(error => {
-//     Notiflix.Notify.error('Error');
-//     clearPage();
-//   });
-
-// fetchImages
-//   .getImages()
-//   .then(({ hits }) => {
-//     const markup = createMarkup(hits);
-//     refs.galleryRef.insertAdjacentHTML('beforeend', markup);
-//   })
-//   .catch(error => {
-//     Notiflix.Notify.error('Error');
-//     clearPage();
-//   });
